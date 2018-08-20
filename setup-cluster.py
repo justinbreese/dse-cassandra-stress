@@ -117,14 +117,14 @@ machine_credential_id = machine_credential_response['id']
 cluster_profile_response = do_post("config_profiles/",
     {"name": cluster_name,
      "datastax-version": "6.0.1",
-	 'json': {'cassandra-yaml' : {
+	 ''' 'json': {'cassandra-yaml' : {
                   'client_encryption_options' : { 'enabled' : True },
                   'server_encryption_options' : { 'internode_encryption' : 'all',
 							                      'require_client_auth' : True,
 							                      'require_endpoint_verification' : False
                   								}
 				 				},
-             },
+             }, '''
      "comment": 'LCM provisioned %s' % cluster_name})
 cluster_profile_id = cluster_profile_response['id']
 
