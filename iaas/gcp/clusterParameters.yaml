@@ -9,7 +9,7 @@ resources:
     - us-east1-b
     network: default
     machineType: n1-highmem-16
-    nodesPerZone: 6
+    nodesPerZone: 4
     dataDiskType: pd-ssd
     diskSize: 60
-    sshKeyValue: "<insert SSH key>"
+    sshKeyValue: "<insert SSH public key here>"

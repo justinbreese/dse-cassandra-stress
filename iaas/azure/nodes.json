@@ -255,7 +255,8 @@
         "storageProfile": {
           "imageReference": "[variables('osSettings').imageReference]",
           "osDisk": {
-            "createOption": "FromImage"
+            "createOption": "FromImage",
+            "diskSizeGB": "300"
           },
           "dataDisks": []
         },

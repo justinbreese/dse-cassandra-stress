@@ -15,10 +15,13 @@
     "ParameterKey": "Subnets",
     "ParameterValue": "subnet-b5f6ead0,subnet-cbefa192,subnet-0982b37e"
   },
-
   {
     "ParameterKey": "DataCenterSize",
     "ParameterValue": "4"
+  },
+  {
+    "ParameterKey": "VolumeSize",
+    "ParameterValue": "1000"
   },
   {
     "ParameterKey": "InstanceType",

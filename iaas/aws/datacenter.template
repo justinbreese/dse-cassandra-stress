@@ -570,6 +570,12 @@
                             "VolumeSize": {
                                 "Ref": "VolumeSize"
                             }
+                        },
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "VolumeType": "gp2",
+                            "VolumeSize": "100",
+                            "Iops": "3000"
                         }
                     }
                 ],

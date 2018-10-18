@@ -26,6 +26,8 @@ ap.add_argument("-s", "--server_list", required=True,
 	help="list of servers to be added to the new cluster")
 ap.add_argument("-u", "--user", required=True,
 	help="username for the server")
+ap.add_argument("-y", "--stress", required=True,
+	help="cassandra stress yaml file")
 args = vars(ap.parse_args())
 
 server_ip = args["LCM_server_ip"]
@@ -33,6 +35,10 @@ ssh_key = args["ssh_key"]
 cluster_name = args["cluster_name"]
 server_list = args["server_list"]
 username = args["user"]
+
+#load the cassandra-stress yaml that was created
+with open(args["stress"], 'r') as stressfile:
+	cassandra_stress=stressfile.read()
 
 repo_user = os.environ.get('academy_user').strip()
 repo_pass = os.environ.get('academy_pass').strip()
@@ -47,7 +53,7 @@ sudo apt-get install -y oracle-java8-installer; \
 echo "deb https://'+repo_user+':'+download_token+'@debian.datastax.com/enterprise \
 stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.sources.list; \
 curl -L https://debian.datastax.com/debian/repo_key | sudo apt-key add - ; \
-sudo apt-get update; sudo apt-get install opscenter; sudo service opscenterd start;\
+sudo apt-get update; sudo apt-get install opscenter; sudo service opscenterd start; sudo apt-get update; sudo apt-get install -y dse-full; echo "'+ cassandra_stress+ '" >> stress.yaml;\
 \' 2>/dev/null'
 
 output = subprocess.check_output(['bash','-c', bashCommand])
@@ -116,7 +122,7 @@ machine_credential_id = machine_credential_response['id']
 
 cluster_profile_response = do_post("config_profiles/",
     {"name": cluster_name,
-     "datastax-version": "6.0.2",
+     "datastax-version": "6.0.4",
 	  'json': {'cassandra-yaml' : {
 	  			  'num_tokens' : 256
 				 				  },
