@@ -8,7 +8,7 @@
 * Setup 4 VMs on each of the cloud providers; VM size was as close as possible with similar storage provisioned: i3.4xl, Standard_DS14_v2, and n1-highmem-16
 * 3 of the VMs will be running DataStax Enterprise as their own cluster; again each cloud is their own cluster
 * The 4th VM runs DataStax OpsCenter and acts as a `cassandra-stress` client
-![Screenshot](architecture.jpg)
+![Screenshot](https://github.com/justinbreese/dse-cassandra-stress/blob/master/architecture.png?raw=true)
 * Next, I ran this test on each of the clients 35 times: `cassandra-stress user profile=stress.yaml n=1000000 ops\(insert=3,likelyquery1=1\) cl=QUORUM -mode native cql3 user=cassandra password=datastax -node 104.196.140.126 -rate threads\>=121`
   * I then captured the results into an Excel file
 * Then I decided to really turn it up and do 1B operations; and it led to this test that was run once on each of the clients: `nohup cassandra-stress user profile=stress.yaml n=1000000000 ops\(insert=3,likelyquery1=1\) cl=QUORUM -mode native cql3 user=cassandra password=datastax -node 40.118.149.27 -rate threads=300 -log file=output.txt -errors ignore`
